@@ -6,6 +6,7 @@ public class Test : MonoBehaviour
 {
     // Start is called before the first frame update
     public string a;
+    [SerializeField] private int num;
     void Start()
     {
         Debug.Log(a);
