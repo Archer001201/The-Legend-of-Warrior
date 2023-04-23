@@ -16,10 +16,10 @@ public class PhysicsCheck : MonoBehaviour
 
     public void Check() {
         //检查地面
-        isGround = Physics2D.OverlapCircle((Vector2)transform.position + bottomOffset, checkRadius, groundLayer);
+        isGround = Physics2D.OverlapCircle((Vector2)transform.position + bottomOffset*transform.localScale, checkRadius, groundLayer);
     }
 
     private void OnDrawGizmosSelected() {
-        Gizmos.DrawWireSphere((Vector2)transform.position + bottomOffset, checkRadius);
+        Gizmos.DrawWireSphere((Vector2)transform.position + bottomOffset*transform.localScale, checkRadius);
     }
 }

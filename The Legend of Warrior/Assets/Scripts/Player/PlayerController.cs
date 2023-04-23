@@ -68,10 +68,15 @@ public class PlayerController : MonoBehaviour
         if (!isCrouch)
             rb.velocity = new Vector2(inputDirection.x*speed*Time.deltaTime, rb.velocity.y);
         
-        if (inputDirection.x > 0)
-            spriteRenderer.flipX = false;
-        if (inputDirection.x < 0)
-            spriteRenderer.flipX = true;
+        float faceDir = transform.localScale.x;
+        if (inputDirection.x > 0 && faceDir < 0)
+            faceDir *= -1;
+            //spriteRenderer.flipX = false;
+        if (inputDirection.x < 0 && faceDir > 0)
+            faceDir *= -1;
+            //spriteRenderer.flipX = true;
+
+            transform.localScale = new Vector3(faceDir,1,1);
 
         isCrouch = inputDirection.y < -0.5f && physicsCheck.isGround;
         if (isCrouch){
