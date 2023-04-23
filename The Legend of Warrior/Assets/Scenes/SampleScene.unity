@@ -11339,7 +11339,7 @@ Tilemap:
       - {fileID: -726034744, guid: 589e1c8c3462a4c7ea43124a5a83c814, type: 3}
       - {fileID: 27785646, guid: 589e1c8c3462a4c7ea43124a5a83c814, type: 3}
       - {fileID: 1010314698, guid: 589e1c8c3462a4c7ea43124a5a83c814, type: 3}
-      m_AnimationSpeed: 7.0000005
+      m_AnimationSpeed: 7
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: -9, y: -2, z: 0}
@@ -11416,7 +11416,7 @@ Tilemap:
       - {fileID: -1091940058, guid: 589e1c8c3462a4c7ea43124a5a83c814, type: 3}
       - {fileID: 234399574, guid: 589e1c8c3462a4c7ea43124a5a83c814, type: 3}
       - {fileID: -351964613, guid: 589e1c8c3462a4c7ea43124a5a83c814, type: 3}
-      m_AnimationSpeed: 7.0000005
+      m_AnimationSpeed: 7
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: -8, y: 0, z: 0}
@@ -11625,7 +11625,7 @@ Tilemap:
       - {fileID: 556135858, guid: 589e1c8c3462a4c7ea43124a5a83c814, type: 3}
       - {fileID: -1452364144, guid: 589e1c8c3462a4c7ea43124a5a83c814, type: 3}
       - {fileID: -1768552256, guid: 589e1c8c3462a4c7ea43124a5a83c814, type: 3}
-      m_AnimationSpeed: 7.0000005
+      m_AnimationSpeed: 7
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: -10, y: 7, z: 0}
@@ -11856,7 +11856,7 @@ Tilemap:
       - {fileID: 556135858, guid: 589e1c8c3462a4c7ea43124a5a83c814, type: 3}
       - {fileID: -1452364144, guid: 589e1c8c3462a4c7ea43124a5a83c814, type: 3}
       - {fileID: -1768552256, guid: 589e1c8c3462a4c7ea43124a5a83c814, type: 3}
-      m_AnimationSpeed: 7.0000005
+      m_AnimationSpeed: 7
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: -10, y: 14, z: 0}
@@ -13654,7 +13654,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 510290495}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -1.04, z: 0}
+  m_LocalPosition: {x: 0, y: 0.36, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -13722,7 +13722,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!114 &510290500
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13736,6 +13736,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inputDirection: {x: 0, y: 0}
+  speed: 300
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
