@@ -10,38 +10,45 @@ public class PlayerController : MonoBehaviour
     private PhysicsCheck physicsCheck;
     public PlayerInputControl inputControl;
     public Vector2 inputDirection;
+    private CapsuleCollider2D coll;
+
     [Header("基本参数")] 
     public float speed;
     private float runSpeed;
     private float walkSpeed => speed / 2.5f;
     public float jumpForce;
-  
+    public bool isCrouch;
+    private Vector2 originalOffset;
+    private Vector2 originalSize;
 
-    private void Awake()
-    {
+    private void Awake() {
         rb = GetComponent<Rigidbody2D>();
         physicsCheck = GetComponent<PhysicsCheck>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        coll = GetComponent<CapsuleCollider2D>();
+
+        originalOffset = coll.offset;
+        originalSize = coll.size;
+
         inputControl = new PlayerInputControl();
         inputControl.Gameplay.Jump.started += Jump;
 
+
         #region 强制走路
         runSpeed = speed;
-        inputControl.Gameplay.WalkButton.performed += ctx => 
-        {
+        inputControl.Gameplay.WalkButton.performed += ctx =>{
             if (physicsCheck.isGround)
                 speed = walkSpeed;
         };
 
-        inputControl.Gameplay.WalkButton.canceled += ctx =>
-        {
+        inputControl.Gameplay.WalkButton.canceled += ctx =>{
             if (physicsCheck.isGround)
                 speed = runSpeed;
         };
         #endregion;
     }
 
-    private void OnEnable(){
+    private void OnEnable() {
         inputControl.Enable();
     }
 
@@ -57,16 +64,26 @@ public class PlayerController : MonoBehaviour
         Move();
     }
 
-    public void Move(){
-        rb.velocity = new Vector2(inputDirection.x*speed*Time.deltaTime, rb.velocity.y);
+    public void Move() {
+        if (!isCrouch)
+            rb.velocity = new Vector2(inputDirection.x*speed*Time.deltaTime, rb.velocity.y);
         
         if (inputDirection.x > 0)
             spriteRenderer.flipX = false;
         if (inputDirection.x < 0)
             spriteRenderer.flipX = true;
+
+        isCrouch = inputDirection.y < -0.5f && physicsCheck.isGround;
+        if (isCrouch){
+            coll.offset = new Vector2(-0.12f, 0.8f);
+            coll.size = new Vector2(0.75f, 1.6f);
+        }else{
+            coll.offset = originalOffset;
+            coll.size = originalSize;
+        }
     }
 
-    private void Jump(InputAction.CallbackContext obj){
+    private void Jump(InputAction.CallbackContext obj) {
         if (physicsCheck.isGround)
             rb.AddForce(transform.up*jumpForce, ForceMode2D.Impulse);
     }
