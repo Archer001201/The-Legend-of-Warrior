@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
 {
     private Rigidbody2D rb;
     private SpriteRenderer spriteRenderer;
+    private PhysicsCheck physicsCheck;
     public PlayerInputControl inputControl;
     public Vector2 inputDirection;
     [Header("Basic Parameter")] 
@@ -18,6 +19,7 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         inputControl = new PlayerInputControl();
+        physicsCheck = GetComponent<PhysicsCheck>();
         inputControl.Gameplay.Jump.started += Jump;
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
@@ -35,10 +37,10 @@ public class PlayerController : MonoBehaviour
     }
 
     private void FixedUpdate() {
-        move();
+        Move();
     }
 
-    public void move(){
+    public void Move(){
         rb.velocity = new Vector2(inputDirection.x*speed*Time.deltaTime, rb.velocity.y);
         
         if (inputDirection.x > 0)
@@ -48,6 +50,7 @@ public class PlayerController : MonoBehaviour
     }
 
     private void Jump(InputAction.CallbackContext obj){
-        rb.AddForce(transform.up*jumpForce, ForceMode2D.Impulse);
+        if (physicsCheck.isGround)
+            rb.AddForce(transform.up*jumpForce, ForceMode2D.Impulse);
     }
 }
