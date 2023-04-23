@@ -5,16 +5,20 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
-    public PlayerInputControl inputControl;
-    public Vector2 inputDirection;
-    public float speed;
     private Rigidbody2D rb;
     private SpriteRenderer spriteRenderer;
+    public PlayerInputControl inputControl;
+    public Vector2 inputDirection;
+    [Header("Basic Parameter")] 
+    public float speed;
+    public float jumpForce;
+  
 
     private void Awake()
     {
-        inputControl = new PlayerInputControl();
         rb = GetComponent<Rigidbody2D>();
+        inputControl = new PlayerInputControl();
+        inputControl.Gameplay.Jump.started += Jump;
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
@@ -41,5 +45,9 @@ public class PlayerController : MonoBehaviour
             spriteRenderer.flipX = false;
         if (inputDirection.x < 0)
             spriteRenderer.flipX = true;
+    }
+
+    private void Jump(InputAction.CallbackContext obj){
+        rb.AddForce(transform.up*jumpForce, ForceMode2D.Impulse);
     }
 }
