@@ -10,18 +10,35 @@ public class PlayerController : MonoBehaviour
     private PhysicsCheck physicsCheck;
     public PlayerInputControl inputControl;
     public Vector2 inputDirection;
-    [Header("Basic Parameter")] 
+    [Header("基本参数")] 
     public float speed;
+    private float runSpeed;
+    private float walkSpeed => speed / 2.5f;
     public float jumpForce;
   
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        inputControl = new PlayerInputControl();
         physicsCheck = GetComponent<PhysicsCheck>();
-        inputControl.Gameplay.Jump.started += Jump;
         spriteRenderer = GetComponent<SpriteRenderer>();
+        inputControl = new PlayerInputControl();
+        inputControl.Gameplay.Jump.started += Jump;
+
+        #region 强制走路
+        runSpeed = speed;
+        inputControl.Gameplay.WalkButton.performed += ctx => 
+        {
+            if (physicsCheck.isGround)
+                speed = walkSpeed;
+        };
+
+        inputControl.Gameplay.WalkButton.canceled += ctx =>
+        {
+            if (physicsCheck.isGround)
+                speed = runSpeed;
+        };
+        #endregion;
     }
 
     private void OnEnable(){
