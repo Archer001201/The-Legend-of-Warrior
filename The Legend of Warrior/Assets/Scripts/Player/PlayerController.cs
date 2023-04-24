@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,31 +12,39 @@ public class PlayerController : MonoBehaviour
     public PlayerInputControl inputControl;
     public Vector2 inputDirection;
     private CapsuleCollider2D coll;
+    private PlayerAnimation playerAnimation;
 
     [Header("基本参数")] 
     public float speed;
     private float runSpeed;
     private float walkSpeed => speed / 2.5f;
     public float jumpForce;
-    public bool isCrouch;
+    public float hurtForce;
     private Vector2 originalOffset;
     private Vector2 originalSize;
-    public float hurtForce;
+
+    [Header("物理材质")]
+    public PhysicsMaterial2D normal;
+    public PhysicsMaterial2D wall;
+
+    [Header("状态")]
+    public bool isCrouch;
     public bool isHurt;
     public bool isDead;
+    public bool isAttack;
 
     private void Awake() {
         rb = GetComponent<Rigidbody2D>();
         physicsCheck = GetComponent<PhysicsCheck>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         coll = GetComponent<CapsuleCollider2D>();
+        playerAnimation = GetComponent<PlayerAnimation>();
 
         originalOffset = coll.offset;
         originalSize = coll.size;
 
         inputControl = new PlayerInputControl();
         inputControl.Gameplay.Jump.started += Jump;
-
 
         #region 强制走路
         runSpeed = speed;
@@ -49,6 +58,8 @@ public class PlayerController : MonoBehaviour
                 speed = runSpeed;
         };
         #endregion;
+
+        inputControl.Gameplay.Attack.started += PlayerAttack;
     }
 
     private void OnEnable() {
@@ -61,10 +72,11 @@ public class PlayerController : MonoBehaviour
 
     private void Update() {
         inputDirection = inputControl.Gameplay.Move.ReadValue<Vector2>();
+        CheckState();
     }
 
     private void FixedUpdate() {
-        if (!isHurt)
+        if (!isHurt && !isAttack)
             Move();
     }
 
@@ -97,6 +109,12 @@ public class PlayerController : MonoBehaviour
             rb.AddForce(transform.up*jumpForce, ForceMode2D.Impulse);
     }
 
+    private void PlayerAttack(InputAction.CallbackContext obj)
+    {
+        playerAnimation.PlayAttack();
+        isAttack = true;
+    }
+
     public void GetHurt(Transform attacker){
         isHurt = true;
         rb.velocity = Vector2.zero;
@@ -108,5 +126,15 @@ public class PlayerController : MonoBehaviour
     public void PlayerDead(){
         isDead = true;
         inputControl.Gameplay.Disable();
+    }
+
+    private void CheckState()
+    {
+        if (isDead)
+            gameObject.layer = LayerMask.NameToLayer("Enemy");
+        else
+            gameObject.layer = LayerMask.NameToLayer("Player");
+
+        coll.sharedMaterial = physicsCheck.isGround ? normal : wall;
     }
 }

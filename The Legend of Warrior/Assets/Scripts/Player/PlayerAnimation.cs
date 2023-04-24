@@ -13,7 +13,7 @@ public class PlayerAnimation : MonoBehaviour
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         physicsCheck = GetComponent<PhysicsCheck>();
-        playerController = GetComponent<PlayerController>();
+        playerController = GetComponent<PlayerController>();   
     }
 
     private void Update() {
@@ -26,9 +26,14 @@ public class PlayerAnimation : MonoBehaviour
         anim.SetBool("isGround", physicsCheck.isGround);
         anim.SetBool("isCrouch", playerController.isCrouch);
         anim.SetBool("isDead", playerController.isDead);
+        anim.SetBool("isAttack", playerController.isAttack);
     }
 
     public void PlayHurt(){
         anim.SetTrigger("hurt");
+    }
+
+    public void PlayAttack(){
+        anim.SetTrigger("attack");
     }
 }
