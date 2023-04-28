@@ -32,6 +32,7 @@ public class PlayerController : MonoBehaviour
     public bool isHurt;
     public bool isDead;
     public bool isAttack;
+    public bool isDefence;
 
     private void Awake() {
         rb = GetComponent<Rigidbody2D>();
@@ -60,6 +61,13 @@ public class PlayerController : MonoBehaviour
         #endregion;
 
         inputControl.Gameplay.Attack.started += PlayerAttack;
+        
+        inputControl.Gameplay.Defence.performed += ctx =>{
+            isDefence = true;
+        };
+        inputControl.Gameplay.Defence.canceled += ctx =>{
+            isDefence = false;
+        };
     }
 
     private void OnEnable() {
@@ -76,7 +84,7 @@ public class PlayerController : MonoBehaviour
     }
 
     private void FixedUpdate() {
-        if (!isHurt && !isAttack)
+        if (!isHurt && !isAttack && !isDefence)
             Move();
     }
 

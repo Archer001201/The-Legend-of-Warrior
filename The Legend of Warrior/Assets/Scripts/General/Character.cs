@@ -16,6 +16,7 @@ public class Character : MonoBehaviour
 
     [Header("事件")]
     public UnityEvent<Transform> OnTakeDamage;
+    public UnityEvent<Transform> OnDefence;
     public UnityEvent OnDie;
 
     private void Awake() {
@@ -34,7 +35,9 @@ public class Character : MonoBehaviour
     public void TakeDamage(Attack attacker){
         if (invulnerabale)
             return;
-        if (currentHealth - attacker.damgae > 0){
+        if (CompareTag("Player") && GetComponent<PlayerController>().isDefence)
+            OnDefence?.Invoke(attacker.transform);
+        else if (currentHealth - attacker.damgae > 0){
             currentHealth -= attacker.damgae;
             TriggerInvulnerable();
             OnTakeDamage?.Invoke(attacker.transform);
