@@ -4870,7 +4870,7 @@ Tilemap:
       - {fileID: 556135858, guid: 589e1c8c3462a4c7ea43124a5a83c814, type: 3}
       - {fileID: -1452364144, guid: 589e1c8c3462a4c7ea43124a5a83c814, type: 3}
       - {fileID: -1768552256, guid: 589e1c8c3462a4c7ea43124a5a83c814, type: 3}
-      m_AnimationSpeed: 7
+      m_AnimationSpeed: 7.0000005
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: -11, y: -6, z: 0}
@@ -5156,7 +5156,7 @@ Tilemap:
       - {fileID: -1091940058, guid: 589e1c8c3462a4c7ea43124a5a83c814, type: 3}
       - {fileID: 234399574, guid: 589e1c8c3462a4c7ea43124a5a83c814, type: 3}
       - {fileID: -351964613, guid: 589e1c8c3462a4c7ea43124a5a83c814, type: 3}
-      m_AnimationSpeed: 7.0000005
+      m_AnimationSpeed: 7
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: -9, y: 2, z: 0}
@@ -5178,7 +5178,7 @@ Tilemap:
       - {fileID: -726034744, guid: 589e1c8c3462a4c7ea43124a5a83c814, type: 3}
       - {fileID: 27785646, guid: 589e1c8c3462a4c7ea43124a5a83c814, type: 3}
       - {fileID: 1010314698, guid: 589e1c8c3462a4c7ea43124a5a83c814, type: 3}
-      m_AnimationSpeed: 7
+      m_AnimationSpeed: 7.0000005
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: -10, y: 3, z: 0}
@@ -5189,7 +5189,7 @@ Tilemap:
       - {fileID: -1091940058, guid: 589e1c8c3462a4c7ea43124a5a83c814, type: 3}
       - {fileID: 234399574, guid: 589e1c8c3462a4c7ea43124a5a83c814, type: 3}
       - {fileID: -351964613, guid: 589e1c8c3462a4c7ea43124a5a83c814, type: 3}
-      m_AnimationSpeed: 7.0000005
+      m_AnimationSpeed: 7
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: -9, y: 3, z: 0}
@@ -5233,7 +5233,7 @@ Tilemap:
       - {fileID: 556135858, guid: 589e1c8c3462a4c7ea43124a5a83c814, type: 3}
       - {fileID: -1452364144, guid: 589e1c8c3462a4c7ea43124a5a83c814, type: 3}
       - {fileID: -1768552256, guid: 589e1c8c3462a4c7ea43124a5a83c814, type: 3}
-      m_AnimationSpeed: 7
+      m_AnimationSpeed: 7.0000005
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: -11, y: 5, z: 0}
@@ -5496,7 +5496,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inputDirection: {x: 0, y: 0}
-  speed: 300
+  speed: 400
   jumpForce: 16
   hurtForce: 8
   normal: {fileID: 6200000, guid: bdafac17e77504e9481516aef8cc0b42, type: 2}
