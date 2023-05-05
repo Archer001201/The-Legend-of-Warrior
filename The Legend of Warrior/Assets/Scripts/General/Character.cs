@@ -15,12 +15,14 @@ public class Character : MonoBehaviour
     public bool invulnerabale;
 
     [Header("事件")]
+    public UnityEvent<Character> OnHealthChange;
     public UnityEvent<Transform> OnTakeDamage;
     public UnityEvent<Transform> OnDefence;
     public UnityEvent OnDie;
 
     private void Awake() {
         currentHealth = maxHealth;
+        OnHealthChange?.Invoke(this);
     }
 
     private void Update() {
@@ -46,6 +48,7 @@ public class Character : MonoBehaviour
             currentHealth = 0;
             OnDie?.Invoke();
         }
+        OnHealthChange?.Invoke(this);
         
     }
 
