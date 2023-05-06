@@ -23,6 +23,7 @@ public class Character : MonoBehaviour
     private void Awake() {
         currentHealth = maxHealth;
         OnHealthChange?.Invoke(this);
+        Debug.Log("111");
     }
 
     private void Update() {
